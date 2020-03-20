@@ -1,0 +1,51 @@
+tamanho
+array = {01010}
+
+#### 1ª parte : deslocar o array
+array_esquerda = {1010x}
+array_direita = {x0101}
+
+for ( i=0, i < tamanho, i++  )
+    if (i==tamanho) 
+        array_esquerda[i] = {0,1,array[0]}
+    else     
+        array_esquerda[i] = array[i+1]
+for ( i=0, i < tamanho, i++  )
+    array_direita[i] = array[i-1]
+
+#### 2ª parte: aplicar regra
+
+
+#evolucao temporal
+for tempo
+    array_novo={00000} #array zerado
+
+    ### cada vez que vc chama "regra" evolui "um tempo"
+    for i
+        array_novo[i] = regra( array_esquerda[i], array[i] , array_direita[i] )
+
+    array = array_novo
+    print array_novo
+
+#### função 
+regra(a,b,c)
+    se a=1,b=1,c=1 então d=0
+    se a=1,b=1,c=0 então d=0
+    se a=1,b=0,c=1 então d=0
+    se a=1,b=0,c=0 então d=1
+    se a=0,b=1,c=1 então d=1
+    se a=0,b=1,c=0 então d=1
+    se a=0,b=0,c=1 então d=1
+    se a=0,b=0,c=0 então d=0
+    return d
+
+regra_generica(a,b,c,rededomomento)
+    se a=1,b=1,c=1 então d=rededomomento[7]
+    se a=1,b=1,c=0 então d=rededomomento[6]
+    se a=1,b=0,c=1 então d=rededomomento[5]
+    se a=1,b=0,c=0 então d=rededomomento[4]
+    se a=0,b=1,c=1 então d=rededomomento[3]
+    se a=0,b=1,c=0 então d=rededomomento[2]
+    se a=0,b=0,c=1 então d=rededomomento[1]
+    se a=0,b=0,c=0 então d=rededomomento[0]
+    return d
